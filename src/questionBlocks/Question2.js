@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
 import UiState from '../state/UiState';
-import { question1 } from '../constants/index';
+import { question2 } from '../constants/index';
 import { YesNoToggle } from '../components/YesNoToggle';
+import { QuestionSet } from '../components/QuestionSet';
+import { Select } from '../components/Select';
 
 @observer
 export class Question2 extends Component {
     render() {
         return (
-            <div>
-                <h5>{question1.question}</h5>
-                <YesNoToggle onChange={(val) => UiState.active_license = val}  />
-            </div>
+            <QuestionSet
+                question={question2.question}
+                AnswerComponent={<Select selectedValue={UiState.role_selection} onChange={(val) => {UiState.role_selection = val}}  />}                
+            />
         );
     }
 }

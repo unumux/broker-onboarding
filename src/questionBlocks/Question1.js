@@ -10,7 +10,10 @@ import { QuestionSet } from '../components/QuestionSet';
 export class Question1 extends Component {
     render() {
         return (
-            <YesNoToggle selectedValue={UiState.active_license} onChange={(val) => {UiState.active_license = val}}  />
+            <QuestionSet 
+                question={question1.question}
+                AnswerComponent={<YesNoToggle selectedValue={UiState.active_license} onChange={(val) => {UiState.active_license = val}}  />}
+            />
         );
     }
 }
