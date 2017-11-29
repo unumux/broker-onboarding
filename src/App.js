@@ -1,23 +1,32 @@
+import { Question2a } from './questionBlocks/Question2a';
 import React, { Component } from 'react';
 import {observer} from "mobx-react";
 import { YesNoToggle } from './components/YesNoToggle';
 import UiState from './state/UiState';
 import { ConditionalContent } from './components/ConditionalContent';
-import { question1 } from './constants/index';
 import { Question1 } from './questionBlocks/Question1';
 import { Question2 } from './questionBlocks/Question2';
+import { Question3 } from './questionBlocks/Question3';
 
 @observer
 class App extends Component {
   render() {
+    console.log(UiState.question2aVisible);
+      
     return (
         <div>
-            <h1>{UiState.active_license}</h1>
             <Question1 />
             <ConditionalContent 
-                value={UiState.active_license}
-                componentTrue={<Question2 />}
-                componentFalse={<h1>{question1.falseText}</h1>}
+                value={UiState.question2Visible}
+                componentTrue={<Question2/>}
+            />
+            <ConditionalContent 
+                value={UiState.question2aVisible}
+                componentTrue={<Question2a/>}
+            />
+            <ConditionalContent 
+                value={UiState.question3Visible}
+                componentTrue={<Question3/>}
             />
         </div>
     );

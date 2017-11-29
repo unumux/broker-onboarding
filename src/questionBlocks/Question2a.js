@@ -7,12 +7,12 @@ import { QuestionSet } from '../components/QuestionSet';
 import { questions } from '../constants/questions';
 
 @observer
-export class Question1 extends Component {
+export class Question2a extends Component {
     render() {
         return (
             <QuestionSet 
-                question={questions['1']}
-                AnswerComponent={<YesNoToggle selectedValue={UiState.answer1} onChange={(val) => {UiState.answer1 = val}}  />}
+                question={questions['2a'][UiState.answer2]}
+                AnswerComponent={<YesNoToggle selectedValue={UiState.answer2a} onChange={(val) => {UiState.answer2a = val}}  />}
             />
         );
     }

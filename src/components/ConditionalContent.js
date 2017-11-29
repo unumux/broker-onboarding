@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ConditionalContent = ({ value, componentFalse, componentTrue }) => {
+export const ConditionalContent = ({ value, componentFalse = null, componentTrue = null }) => {
     if(value === true) {
         return componentTrue;
     }
