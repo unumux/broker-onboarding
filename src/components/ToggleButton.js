@@ -31,7 +31,7 @@ export class ToggleButton extends React.Component {
 
         return (
             <div>
-           <Radio name={name} checked={checked} value={value} id={this.id} />
+                <Radio name={name} checked={checked} value={value} id={this.id} />
                 <Label htmlFor={this.id}>
                     {children}
                 </Label>

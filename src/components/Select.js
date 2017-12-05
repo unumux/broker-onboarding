@@ -10,8 +10,8 @@ export class Select extends React.PureComponent {
         const {onChange, selectedValue, options} = this.props;
 
         return (
-            <StyledSelect onChange={onChange}>
-                <option disabled selected value> -- select an option -- </option>
+            <StyledSelect onChange={onChange} value={selectedValue}>
+                <option disabled> -- select an option -- </option>
                 {options.map((opt) => (
                     <option key={opt} value={opt}>{opt}</option>
                 ))}
