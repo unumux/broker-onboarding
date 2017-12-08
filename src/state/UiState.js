@@ -1,3 +1,4 @@
+import { questions } from '../constants/questions';
 import { observable, computed } from 'mobx';
 
 export class UiState {
@@ -74,6 +75,10 @@ export class UiState {
             this.Q9Visible
             && this.A9 === 'Colonial Life'
         );
+    }
+
+    @computed get Q3() {
+        return questions[this.A2];
     }
 }
 

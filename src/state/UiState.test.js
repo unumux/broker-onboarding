@@ -1,6 +1,15 @@
+import { questions } from '../constants/questions';
 import _ from 'lodash';
 import { answerOptions } from '../constants/answer_options';
-import { allScenarios, answerKeys, generateAllScenarios, generatePermutations, removeTrue, runTests } from './testUtil';
+import {
+    allScenarios,
+    answerKeys,
+    answerQuestions,
+    generateAllScenarios,
+    generatePermutations,
+    removeTrue,
+    runTests,
+} from './testUtil';
 import {UiState} from './UiState';
 
 let state;
@@ -122,4 +131,12 @@ test('Q10Visible', () => {
     runTests(state, expectedTrue, 'Q10Visible', true);
     runTests(state, expectedFalse, 'Q10Visible', false);
 });
+
+test.only('Q3', () => {
+    const questionVariants = questions[2];
+    answerOptions['2'].forEach((option) => {
+        const expectedQuestion = questions[option];
+        console.log(expectedQuestion)
+    });
+})
 

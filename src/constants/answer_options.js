@@ -8,25 +8,21 @@ module.exports= { answerOptions: {
         'Technology Provider (Tech Funding Partner)',
         'General Agent (GA)'
     ],
-    '3': [
+    '4': [
         'SSN',
         'Tax ID'
     ],
-    '4': [
+    '5': [
         'Agency, Brokerage Firm, or Company',
         'Individual Broker'
     ],
-    '5a': [
+    '7': [
         'Colonial Life',
         'Independent Company',
         'NMO Member Offerings',
         'NMO Owned Offerings'
     ],
-    '5b': [
-        'Independent Company',
-        'NMO Member & Owned Offerings'
-    ],
-    '6': [
+    '9': [
         'Colonial Life',
         'Independent Broker',
         'NMO Member Offerings',

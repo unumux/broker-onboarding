@@ -17,15 +17,14 @@ export let answerKeys = [
 export const possibleValues = [
     [true, false, undefined], // answer1
     [...answerOptions['2'], undefined], // answer2
-    [true, false, undefined], // answer2a
-    [...answerOptions['3'], undefined], // answer3
+    [true, false, undefined], // answer3
     [...answerOptions['4'], undefined], // answer4
-    [true, false, undefined], // answer4a
-    [...answerOptions['5a'], undefined], // answer5a
-    [...answerOptions['5b'], undefined], // answer5b
-    [true, false, undefined], // answer5_confirmation
-    [...answerOptions['6'], undefined], // answer6
-    [true, false, undefined] // answer6_confirmation
+    [...answerOptions['5'], undefined], // answer5
+    [true, false, undefined], // answer6
+    [...answerOptions['7'], undefined], // answer7
+    [true, false, undefined], // answer8
+    [...answerOptions['9'], undefined], // answer10
+    [true, false, undefined], // answer9
 ];
 
 export const allScenarios = generateAllScenarios();

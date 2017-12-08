@@ -12,7 +12,7 @@ export class Question5 extends Component {
         return (
             <QuestionSet 
                 question={questions['5']}
-                AnswerComponent={<YesNoToggle selectedValue={UiState.active_license} onChange={(val) => {UiState.active_license = val}}  />}
+                AnswerComponent={<YesNoToggle selectedValue={UiState.A5} onChange={(val) => {UiState.A5 = val}}  />}
             />
         );
     }
