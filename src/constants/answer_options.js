@@ -1,4 +1,4 @@
-export const answerOptions = {
+module.exports= { answerOptions: {
     '2': [
         'Broker',
         'Benefit Counselor (Enroller)',
@@ -33,4 +33,5 @@ export const answerOptions = {
         'NMO Owned Offerings',
         'NY Life'
     ]
+}
 }

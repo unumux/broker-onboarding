@@ -65,6 +65,10 @@
   dependencies:
     "@types/node" "*"
 
+"@types/lodash@^4.14.87":
+  version "4.14.87"
+  resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.87.tgz#55f92183b048c2c64402afe472f8333f4e319a6b"
+
 "@types/node@*":
   version "8.0.53"
   resolved "https://registry.npmjs.org/@types/node/-/node-8.0.53.tgz#396b35af826fa66aad472c8cb7b8d5e277f4e6d8"

@@ -11,8 +11,6 @@ import { Question3 } from './questionBlocks/Question3';
 @observer
 class App extends Component {
   render() {
-    console.log(UiState.question2aVisible);
-      
     return (
         <div>
             <Question1 />
