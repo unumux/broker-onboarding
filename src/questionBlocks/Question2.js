@@ -11,9 +11,9 @@ export class Question2 extends Component {
     render() {
         return (
             <QuestionSet
-                question={questions['2'].question}
+                question={UiState.Q2}
                 AnswerComponent={
-                    <Select options={answerOptions['2']} selectedValue={UiState.A2} onChange={(event) => {UiState.A2 = event.target.value}}  />
+                    <Select options={answerOptions['2']} selectedValue={UiState.answers[1]} onChange={(event) => {UiState.answers[1] = event.target.value}}  />
                 }           
             />
         );

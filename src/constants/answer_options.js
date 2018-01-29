@@ -1,4 +1,4 @@
-module.exports= { answerOptions: {
+export const answerOptions = {
     '2': [
         'Broker',
         'Benefit Counselor (Enroller)',
@@ -15,19 +15,33 @@ module.exports= { answerOptions: {
     '5': [
         'Agency, Brokerage Firm, or Company',
         'Individual Broker'
-    ],
-    '7': [
-        'Colonial Life',
-        'Independent Company',
-        'NMO Member Offerings',
-        'NMO Owned Offerings'
-    ],
-    '9': [
-        'Colonial Life',
-        'Independent Broker',
-        'NMO Member Offerings',
-        'NMO Owned Offerings',
-        'NY Life'
     ]
-}
-}
+};
+
+export const NMOMemberOfferings = [
+    "Assurex Global",
+    "BAN - Benefit Advisors Network",
+    "NFP Benefits",
+    "ProSential Benefits LLC",
+    "UBA - United Benefit Advisors"
+];
+
+export const NMOOwnedOfferings = [
+    "AON",
+    "Alliant",
+    "BB&T",
+    "Brown & Brown Insurance",
+    "Gallagher Benefit Services, Inc.",
+    "HUB International",
+    "Leavitt",
+    "Lockton Companies",
+    "M Financial Group",
+    "MMA - Marsh & McLennan Agency",
+    "Mercer",
+    "New York Life",
+    "Paychex",
+    "Towers Watson",
+    "USI Insurance Services",
+    "Wells Fargo",
+    "Willis"
+];

@@ -11,8 +11,8 @@ export class Question1 extends Component {
     render() {
         return (
             <QuestionSet 
-                question={questions['1']}
-                AnswerComponent={<YesNoToggle selectedValue={UiState.A1} onChange={(val) => {UiState.A1 = val}}  />}
+                question={UiState.Q1}
+                AnswerComponent={<YesNoToggle selectedValue={UiState.answers[0]} onChange={(val) => {UiState.answers[0] = val}}  />}
             />
         );
     }
