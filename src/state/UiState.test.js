@@ -1,15 +1,6 @@
 import { questions } from '../constants/questions';
 import _ from 'lodash';
 import { answerOptions } from '../constants/answer_options';
-import {
-    allScenarios,
-    answerKeys,
-    answerQuestions,
-    generateAllScenarios,
-    generatePermutations,
-    removeTrue,
-    runTests,
-} from './testUtil';
 import {UiState} from './UiState';
 
 let state;
@@ -19,154 +10,270 @@ beforeEach(() => {
 });
 
 test('all answers should be undefined at start', () => {
-    answerKeys.forEach((key) => {
-        expect(state[key]).toBeUndefined();
+    state.answers.forEach((answer) => {
+        expect(answer).toBeUndefined();
     });
 });
 
-test('only Q1 should be visible at start', () => {
-    expect(state.Q2Visible).toBe(false);
-    expect(state.Q3Visible).toBe(false);
-    expect(state.Q4Visible).toBe(false);
-    expect(state.Q5Visible).toBe(false);
-    expect(state.Q6Visible).toBe(false);
-    expect(state.Q7Visible).toBe(false);
-    expect(state.Q8Visible).toBe(false);
-    expect(state.Q9Visible).toBe(false);
-    expect(state.Q10Visible).toBe(false);
+test('no outcome should be shown at start', () => {
+    expect(state.endProcess).toBe(false);
+    expect(state.link).toBeUndefined();
 });
 
-const Q2VisibleScenarios = [
-    true
-]
+test('only Q1 should be visible at start', () => {
+    expectVisibleQuestions({});
+});
 
-const Q3VisibleScenarios = generatePermutations([
-    Q2VisibleScenarios,
-    ["Broker", 'Enrollment Firm', 'Benefit Counselor (Enroller)']
-]);
+describe('outcomes', () => {
+    // all of these tests are based on the excel sheet
+    test('outcome row 2', () => {
+        setAnswers({ a1: false });
+        expectVisibleQuestions({ endProcess: true });
+    });
 
-const Q3VisibleScenarios = generatePermutations([
-    Q2VisibleScenarios,
-    ["Broker", 'Enrollment Firm', 'Benefit Counselor (Enroller)']
-]);
+    test('outcome row 3', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Broker" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Broker", a3: false });
+        expectVisibleQuestions({ q2: true, q3: true, endProcess: true });
+    });
 
-// test('Q2Visible', () => {
-//     const expectedTrue = [
-//         [true]
-//     ];
+    test('outcome row 4', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Broker" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "SSN" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q9: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "SSN", a9: "Colonial Life" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q9: true, q10: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "SSN", a9: "Colonial Life", a10: false });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q9: true, q10: true, endProcess: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "SSN", a9: "Colonial Life", a10: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q9: true, q10: true, link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpBBkxv9SZexjQ==" });
+    });
 
-//     const expectedFalse = [
-//         [false]
-//     ];
+    test('outcome row 5', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Broker" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "SSN" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q9: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "SSN", a9: "Independent Broker" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q9: true, link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpBLKyf5AhE8IQ==" });
+    });
 
-//     runTests(state, expectedTrue, 'Q2Visible', true);
-//     runTests(state, expectedFalse, 'Q2Visible', false);
-// });
+    test('outcome row 8', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Broker" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "SSN" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q9: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "SSN", a9: "NY Life" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q9: true, link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpA51Bnz+VqcKA==" });
+    });
 
-// test('Q3Visible', () => {
-//     const expectedTrue = [
-//         [true, 'Broker'],
-//         [true, 'Enrollment Firm'],
-//         [true, 'Benefit Counselor (Enroller)']
-//     ];
+    test('outcome row 9', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Broker" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company", a6: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true, q7: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company", a6: true, a7: "Colonial Life" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true, q7: true, q8: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company", a6: true, a7: "Colonial Life", a8: false });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true, q7: true, q8: true, endProcess: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company", a6: true, a7: "Colonial Life", a8: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true, q7: true, q8: true, link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpCfQ3TIuPD1bQ==" });
+    });
 
-//     const expectedFalse = removeTrue(expectedTrue, generateAllScenarios(2));
-//     runTests(state, expectedTrue, 'Q3Visible', true);
-//     runTests(state, expectedFalse, 'Q3Visible', false);
-// });
+    test('outcome row 10', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Broker" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company", a6: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true, q7: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company", a6: true, a7: "Independent Company" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true, q7: true, link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpBWil9IfBnaHg==" });
+    });
 
-// test('Q4Visible', () => {
-//     const expectedTrue = [
-//         [true, 'Broker', true],
-//         [true, 'Enrollment Firm', true]
-//     ];
+    test('outcome row 13', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Broker" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company", a6: false });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true, endProcess: true });
+    });
 
-//     const expectedFalse = removeTrue(expectedTrue, generateAllScenarios(3));
+    test('outcome row 14', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Broker" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Individual Broker", a6: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true, link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpBZ+XSBXEvejw==" });
+    });
 
-//     runTests(state, expectedTrue, 'Q4Visible', true);
-//     runTests(state, expectedFalse, 'Q4Visible', false);
-// });
+    test('outcome row 16', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Broker" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company" });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true });
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Individual Broker", a6: false });
+        expectVisibleQuestions({ q2: true, q3: true, q4: true, q5: true, q6: true, endProcess: true });
+    });
 
-// test('Q5Visible', () => {
-//     const expectedTrue = [
-//         [true, 'Broker', true, 'Tax ID'],
-//         [true, 'Enrollment Firm', true, 'Tax ID']
-//     ];
+    test('outcome row 17', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Benefit Counselor (Enroller)" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Benefit Counselor (Enroller)", a3: false });
+        expectVisibleQuestions({ q2: true, q3: true, endProcess: true });
+    });
 
-//     const expectedFalse = removeTrue(expectedTrue, generateAllScenarios(4));
+    test('outcome row 18', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Benefit Counselor (Enroller)" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Benefit Counselor (Enroller)", a3: true });
+        expectVisibleQuestions({ q2: true, q3: true, link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpAOeDIhO4tHyw==" });
+    });
 
-//     runTests(state, expectedTrue, 'Q5Visible', true);
-//     runTests(state, expectedFalse, 'Q5Visible', false);
-// });
+    test('outcome row 19', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Enrollment Firm" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Enrollment Firm", a3: false });
+        expectVisibleQuestions({ q2: true, q3: true, endProcess: true });
+    });
 
-// test('Q6Visible', () => {
-//     const expectedTrue = generatePermutations([
-//         [true],
-//         ['Broker', 'Enrollment Firm'],
-//         [true],
-//         ['Tax ID'],
-//         answerOptions['5']
-//     ]);
+    test('outcome row 20', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Enrollment Firm" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Enrollment Firm", a3: true });
+        expectVisibleQuestions({ q2: true, q3: true, q6: true });
+        setAnswers({ a1: true, a2: "Enrollment Firm", a3: true, a6: true });
+        expectVisibleQuestions({ q2: true, q3: true, q6: true, link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpBWil9IfBnaHg==" });        
+    });
 
-//     const expectedFalse = removeTrue(expectedTrue, generateAllScenarios(5));
+    test('outcome row 21', () => {
+        setAnswers({ a1: true });
+        expectVisibleQuestions({ q2: true });
+        setAnswers({ a1: true, a2: "Enrollment Firm" });
+        expectVisibleQuestions({ q2: true, q3: true });
+        setAnswers({ a1: true, a2: "Enrollment Firm", a3: true });
+        expectVisibleQuestions({ q2: true, q3: true, q6: true });
+        setAnswers({ a1: true, a2: "Enrollment Firm", a3: true, a6: false });
+        expectVisibleQuestions({ q2: true, q3: true, q6: true, endProcess: true });        
+    });
+});
 
-//     runTests(state, expectedTrue, 'Q6Visible', true);
-//     runTests(state, expectedFalse, 'Q6Visible', false);
-// });
+describe("dynamic text", () => {
+    test("q3 - broker", () => {
+        setAnswers({ a1: true, a2: "Broker" });
+        expect(state.Q3).toEqual("By agreeing, I hereby certify that I am either an individual or represent an organization who acts as an intermediary between an insurer and employers or employees in the sale and servicing of insurance contracts and wish to be onboarded with Unum as such.")
+    });
 
-// test('Q7Visible', () => {
-//     const expectedTrue = generatePermutations([
-//         [true],
-//         ['Broker', 'Enrollment Firm'],
-//         [true],
-//         ['Tax ID'],
-//         answerOptions['5'],
-//         [true]
-//     ]);
+    test("q3 - benefit counselor", () => {
+        setAnswers({ a1: true, a2: "Benefit Counselor (Enroller)" });
+        expect(state.Q3).toEqual("By agreeing, I hereby certify that I am a licensed insurance sales person responsible for assisting employees in the purchase of insurance products including providing educational information during enrollments and wish to be onboarded with Unum as such.")
+    });
 
-//     const expectedFalse = removeTrue(expectedTrue, generateAllScenarios(6));
+    test("q3 - enrollment firm", () => {
+        setAnswers({ a1: true, a2: "Enrollment Firm" });
+        expect(state.Q3).toEqual("By agreeing, I hereby certify that my company is operating solely as a professional enrollment organization that is responsible for driving and supporting the enrollment process and wish to be onboarded with Unum as such.")
+    });
 
-//     runTests(state, expectedTrue, 'Q7Visible', true);
-//     runTests(state, expectedFalse, 'Q7Visible', false);
-// });
+    test("q6 - agency", () => {
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company" });
+        expect(state.Q6).toEqual("By agreeing, I hereby certify that my Agency/Broker Firm/Company has been established with Unum and I wish to be onboarded with Unum as an agent employed by that Agency/Broker Firm/Company.")
+    });
 
-// test('Q8Visible', () => {
-//     const expectedTrue = [
-//         [true, 'Broker', true, 'Tax ID', answerOptions['5'][0], true, 'Colonial Life']
-//     ]
-    
-//     const expectedFalse = removeTrue(expectedTrue, generateAllScenarios(7));
+    test("q6 - individual broker", () => {
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Individual Broker" });
+        expect(state.Q6).toEqual("By agreeing, I hereby certify that I am an officer of the company and represent that I have the full authority to execute this request and following documentation on behalf of the company.")
+    });
 
-//     runTests(state, expectedTrue, 'Q8Visible', true);
-//     runTests(state, expectedFalse, 'Q8Visible', false);
-// });
+    test("q6 - enrollment firm", () => {
+        setAnswers({ a1: true, a2: "Enrollment Firm", a3: true });
+        expect(state.Q6).toEqual("By agreeing, I hereby certify that my Agency/Broker Firm/Company has been established with Unum and I wish to be onboarded with Unum as an agent employed by that Agency/Broker Firm/Company.")
+    });
+});
 
-// test('Q9Visible', () => {
-//     const expectedTrue = ([
-//         [true, 'Broker', true, 'SSN']
-//     ]);
+describe("dynamic options", () => {
+    test("a7", () => {
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "Tax ID", a5: "Agency, Brokerage Firm, or Company", a6: true });
+        expect(state.A7Options).toEqual(["Colonial Life", "Independent Company"]);
+    });
 
-//     const expectedFalse = removeTrue(expectedTrue, generateAllScenarios(4));
+    test("a9", () => {
+        setAnswers({ a1: true, a2: "Broker", a3: true, a4: "SSN" });
+        expect(state.A9Options).toEqual(["Colonial Life", "Independent Broker", "NY Life"]);
+    });
+})
 
-//     runTests(state, expectedTrue, 'Q9Visible', true);
-//     runTests(state, expectedFalse, 'Q9Visible', false);
-// });
+function setAnswers({ a1, a2, a3, a4, a5, a6, a7, a8, a9, a10 }) {
+    state.answers = [a1, a2, a3, a4, a5, a6, a7, a8, a9, a10];
+}
 
-// test('Q10Visible', () => {
-//     const expectedTrue = [
-//         [true, 'Broker', true, 'SSN', undefined, undefined, undefined, undefined, 'Colonial Life']
-//     ];
-
-//     const expectedFalse = removeTrue(expectedTrue, generateAllScenarios(9));
-//     runTests(state, expectedTrue, 'Q10Visible', true);
-//     runTests(state, expectedFalse, 'Q10Visible', false);
-// });
-
-// // test.only('Q3', () => {
-// //     const questionVariants = questions[2];
-// //     answerOptions['2'].forEach((option) => {
-// //         const expectedQuestion = questions[option];
-// //         console.log(expectedQuestion)
-// //     });
-// // })
-
+function expectVisibleQuestions({ q2, q3, q4, q5, q6, q7, q8, q9, q10, endProcess, link }) {
+    expect(state.Q2Visible).toBe(q2 === true);
+    expect(state.Q3Visible).toBe(q3 === true);
+    expect(state.Q4Visible).toBe(q4 === true);
+    expect(state.Q5Visible).toBe(q5 === true);
+    expect(state.Q6Visible).toBe(q6 === true);
+    expect(state.Q7Visible).toBe(q7 === true);
+    expect(state.Q8Visible).toBe(q8 === true);
+    expect(state.Q9Visible).toBe(q9 === true);
+    expect(state.Q10Visible).toBe(q10 === true);
+    expect(state.endProcess).toBe(endProcess === true);
+    expect(state.link).toBe(link);
+}

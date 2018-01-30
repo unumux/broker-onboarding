@@ -1,6 +1,9 @@
+import _ from 'lodash';
+
 import { questions } from '../constants/questions';
 import { NMOMemberOfferings, NMOOwnedOfferings } from '../constants/answer_options';
 import { observable, computed, observe } from 'mobx';
+import { links } from '../constants/links';
 
 export class UiState {
     @observable answers = new Array(10);
@@ -58,6 +61,7 @@ export class UiState {
     @computed get Q7Visible() {
         return (
             this.Q6Visible
+            && this.answers[4] === "Agency, Brokerage Firm, or Company"
             && this.answers[5] === true
         );
     }
@@ -113,16 +117,12 @@ export class UiState {
         if(this.answers[4] === "Agency, Brokerage Firm, or Company") {
             return [
                 "Colonial Life",
-                "Independent Company",
-                ...NMOMemberOfferings,
-                ...NMOOwnedOfferings
+                "Independent Company"
             ];
         }
 
         return [
-            "Independent Company",
-            ...NMOMemberOfferings,
-            ...NMOOwnedOfferings
+            "Independent Company"
         ];
     }
 
@@ -130,14 +130,26 @@ export class UiState {
         return [
             "Colonial Life",
             "Independent Broker",
-            ...NMOMemberOfferings,
-            ...NMOOwnedOfferings,
             "NY Life"
         ];
     }
 
     @computed get link() {
-        
+        const answers = this.answers.toJS();
+        const foundLink = _.find(links, (o) => _.isEqual(o.answers, answers) );
+        if(foundLink) {
+            return foundLink.link;
+        }
+
+        return undefined;
+    }
+
+    @computed get endProcess() {
+        if(this.answers.indexOf(false) >= 0) {
+            return true;
+        }
+
+        return false;
     }
 
     constructor() {

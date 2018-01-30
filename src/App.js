@@ -14,6 +14,8 @@ import {
     Question9,
     Question10
 } from './questionBlocks/Questions';
+import { End } from './components/End';
+import { LinkOut } from './components/LinkOut';
 
 @observer
 class App extends Component {
@@ -56,6 +58,14 @@ class App extends Component {
             <ConditionalContent 
                 value={UiState.Q10Visible}
                 componentTrue={<Question10/>}
+            />
+            <ConditionalContent 
+                value={UiState.endProcess}
+                componentTrue={<End />}
+            />
+            <ConditionalContent 
+                value={UiState.link && UiState.link.length > 0}
+                componentTrue={<LinkOut url={UiState.link} />}
             />
         </div>
     );

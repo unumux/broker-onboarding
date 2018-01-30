@@ -18,8 +18,8 @@ export class YesNoToggle extends React.PureComponent {
 
         return (
             <StyledYesNoToggle onChange={(event) => { onChange(event.target.value === "true")}}>
-                <ToggleButton name={this.name} value={false} checked={selectedValue === false}>No</ToggleButton>
-                <ToggleButton name={this.name} value={true} checked={selectedValue === true}>Yes</ToggleButton>
+                <ToggleButton name={this.name} value={false} checked={selectedValue === false}>Disagree</ToggleButton>
+                <ToggleButton name={this.name} value={true} checked={selectedValue === true}>Agree</ToggleButton>
             </StyledYesNoToggle>
         );
     }
