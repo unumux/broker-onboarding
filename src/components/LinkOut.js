@@ -27,7 +27,7 @@ export class LinkOut extends PureComponent {
         return (
             <StyledLinkOut>
                 <Text>You're ready to begin the Broker Appointment Application process.</Text>
-                <Link href={url}>Continue to Application</Link>
+                <Link href={url} target="_blank">Continue to Application</Link>
             </StyledLinkOut>
         );
     }

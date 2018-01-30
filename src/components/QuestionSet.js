@@ -3,12 +3,16 @@ import styled from 'styled-components';
 
 const StyledQuestionSet = styled.div`
     display: flex;
-    width: 100%;
-    padding: 10px 20px;
+    flex-direction: column;
+    padding: 20px;
     margin: 0 -20px;
 
     &:nth-child(2n) {
         background: #F7F7F7;
+    }
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row;    
     }
 `;
 
@@ -19,9 +23,12 @@ const Question = styled.div`
 `;
 
 const Answer = styled.div`
-    max-width: 225px;
-    flex: 0 0 225px;
-    justify-content: flex-end;
+    
+    @media screen and (min-width: 768px) {
+        max-width: 225px;
+        justify-content: flex-end;
+        flex: 0 0 225px; 
+    }
 `;
 
 export class QuestionSet extends PureComponent {

@@ -4,7 +4,10 @@ import { ToggleButton } from './ToggleButton';
 
 const StyledYesNoToggle = styled.div`
     display: flex;
-    justify-content: flex-end;
+
+    @media screen and (min-width: 768px) {
+        justify-content: flex-end;
+    }
 `;
 
 export class YesNoToggle extends React.PureComponent {
@@ -15,12 +18,12 @@ export class YesNoToggle extends React.PureComponent {
     }
 
     render() {
-        const {onChange, selectedValue} = this.props;
+        const {onChange, selectedValue, buttonYesText = "Agree", buttonNoText = "Disagree"} = this.props;
 
         return (
             <StyledYesNoToggle onChange={(event) => { onChange(event.target.value === "true")}}>
-                <ToggleButton name={this.name} value={false} checked={selectedValue === false}>Disagree</ToggleButton>
-                <ToggleButton name={this.name} value={true} checked={selectedValue === true}>Agree</ToggleButton>
+                <ToggleButton name={this.name} value={false} checked={selectedValue === false}>{buttonNoText}</ToggleButton>
+                <ToggleButton name={this.name} value={true} checked={selectedValue === true}>{buttonYesText}</ToggleButton>
             </StyledYesNoToggle>
         );
     }

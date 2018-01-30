@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledSelect = styled.select`
-    
+    margin-top: 10px;
+
+    @media screen and (min-width: 768px) {
+        margin-top: 5px;
+        flex-direction: row;    
+    }
 `;
 
 export class Select extends React.PureComponent {

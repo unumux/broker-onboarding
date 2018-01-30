@@ -3,6 +3,10 @@ import styled from 'styled-components';
 
 const StyledToggleButton = styled.div`
     margin: 5px 0 0 10px;
+
+    &:first-child {
+        margin-left: 0;
+    }
 `;
 
 const Radio = styled.input.attrs({
