@@ -60,8 +60,12 @@ class App extends Component {
                 componentTrue={<Question10/>}
             />
             <ConditionalContent 
-                value={UiState.endProcess}
-                componentTrue={<End />}
+                value={UiState.endProcess && UiState.answers[0] === false}
+                componentTrue={<End heading="You must have an active license to sell insurance to continue." body="If you have questions, please contact one of our Service Specialists at 1-800-ASK-UNUM (1-800-275-8686) for further assistance." />}
+            />
+            <ConditionalContent 
+                value={UiState.endProcess && UiState.answers[0] === true}
+                componentTrue={<End heading="You must agree to the statement above to continue." body="If you have questions, please contact one of our Service Specialists at 1-800-ASK-UNUM (1-800-275-8686) for further assistance." />}
             />
             <ConditionalContent 
                 value={UiState.link && UiState.link.length > 0}

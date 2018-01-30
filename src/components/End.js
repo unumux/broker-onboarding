@@ -21,10 +21,11 @@ const Body = styled.p`
 
 export class End extends PureComponent {
     render() {
+        const { heading, body } = this.props;
         return (
             <StyledEnd>
-                <Heading>You must agree to the statement above to continue.</Heading>
-                <Body>If you have questions, please contact one of our Service Specialists at 1-800-ASK-UNUM (1-800-275-8686) for further assistance.</Body>
+                <Heading>{heading}</Heading>
+                <Body>{body}</Body>
             </StyledEnd>
         );
     }
