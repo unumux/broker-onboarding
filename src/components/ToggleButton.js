@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const StyledToggleButton = styled.div`
+    margin: 5px 0 0 10px;
+`;
+
 const Radio = styled.input.attrs({
     type: 'radio'
 })`
@@ -12,10 +16,11 @@ const Radio = styled.input.attrs({
 const Label = styled.label.attrs({
     className: 'willow-button'
 })`
-    margin: 10px;
+
+    background: #CDCDCD;
 
     input[type='radio']:checked + & {
-        background: red;
+        background: #fac832;
     }
 `;
 
@@ -30,12 +35,12 @@ export class ToggleButton extends React.Component {
         const {children, name, value, checked} = this.props;
 
         return (
-            <div>
+            <StyledToggleButton>
                 <Radio name={name} checked={checked} value={value} id={this.id} />
                 <Label htmlFor={this.id}>
                     {children}
                 </Label>
-            </div>
+            </StyledToggleButton>
         );
     }
 }

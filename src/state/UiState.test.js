@@ -1,6 +1,3 @@
-import { questions } from '../constants/questions';
-import _ from 'lodash';
-import { answerOptions } from '../constants/answer_options';
 import {UiState} from './UiState';
 
 let state;

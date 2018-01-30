@@ -4,6 +4,7 @@ import { ToggleButton } from './ToggleButton';
 
 const StyledYesNoToggle = styled.div`
     display: flex;
+    justify-content: flex-end;
 `;
 
 export class YesNoToggle extends React.PureComponent {

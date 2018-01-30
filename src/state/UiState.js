@@ -1,22 +1,11 @@
 import _ from 'lodash';
 
 import { questions } from '../constants/questions';
-import { NMOMemberOfferings, NMOOwnedOfferings } from '../constants/answer_options';
 import { observable, computed, observe } from 'mobx';
 import { links } from '../constants/links';
 
 export class UiState {
     @observable answers = new Array(10);
-    // @observable A1; // True, False
-    // @observable A2; // Broker, Benefit Counselor (Enroller), Enrollment Firm, Third Party Administrator (TPA), Benefit Administrator (Ben Admin), Technology Provider (Tech Funding Partner), General Agent (GA)
-    // @observable A3; // True, False
-    // @observable A4; // SSN, Tax ID
-    // @observable A5; // Agency, Brokerage Firm, or Company; Individual Broker
-    // @observable A6; // True, False
-    // @observable A7; // Colonial Life, Independent Company, [NMO_TYPES]
-    // @observable A8; // True, False
-    // @observable A9; // Colonial Life, Independent Broker, [NMO_TYPES], NY Life
-    // @observable A10; // True, False
 
     @computed get Q2Visible() {
         return this.answers[0] === true;
