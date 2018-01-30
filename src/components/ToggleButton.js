@@ -21,10 +21,18 @@ const Label = styled.label.attrs({
     className: 'willow-button'
 })`
 
-    background: #CDCDCD;
+    background: #fff;
+    color: #015294;
+    border: 1px solid #e9e9e9;
+
+    &:hover {
+        background: #f6f6f6;
+        border: 1px solid #e9e9e9;        
+    }
 
     input[type='radio']:checked + & {
-        background: #fac832;
+        background: #015294;
+        color: #fff;
     }
 `;
 
