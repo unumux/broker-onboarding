@@ -12,11 +12,13 @@ const StyledQuestionSet = styled.div`
     }
 
     @media screen and (min-width: 768px) {
-        flex-direction: row;    
+        flex-direction: row; 
+        flex-wrap: wrap;   
     }
 `;
 
-const Question = styled.div`
+const Question = styled.div`    
+    align-self: center;
     margin-right: auto;
     flex: 1 1 0px;
     padding-right: 20px;
@@ -25,19 +27,29 @@ const Question = styled.div`
 const Answer = styled.div`
     
     @media screen and (min-width: 768px) {
-        max-width: 225px;
+        flex: 0 0 275px; 
         justify-content: flex-end;
-        flex: 0 0 225px; 
+        max-width: 275px;
     }
+`;
+
+const Note = styled.div`
+    font-size: 1.5rem;
+    font-style: italic;
+    flex-basis: 100%;
+    flex-shrink: 0;
+    padding: 0;
+    width: 100%;
 `;
 
 export class QuestionSet extends PureComponent {
     render() {
-        const { question, AnswerComponent = null } = this.props;
+        const { question, note, AnswerComponent = null } = this.props;
         return (
             <StyledQuestionSet>
                 <Question>{question}</Question>
                 <Answer>{AnswerComponent}</Answer>
+                {!note ? null : <Note>{note}</Note>}
             </StyledQuestionSet>
         );
     }

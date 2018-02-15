@@ -15,6 +15,7 @@ export class Question2 extends Component {
                 AnswerComponent={
                     <Select options={answerOptions['2']} selectedValue={UiState.answers[1]} onChange={(event) => {UiState.answers[1] = event.target.value}}  />
                 }           
+                note="Note: If your role is a Broker and a Benefit Counselor, select Broker."
             />
         );
     }

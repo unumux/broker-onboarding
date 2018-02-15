@@ -39,11 +39,11 @@ export class UiState {
                 this.Q5Visible
                 && this.answers[4] !== undefined
             )
-            || (
-                this.Q2Visible
-                && this.answers[1] === 'Enrollment Firm'
-                && this.answers[2] === true
-            )
+            // || (
+            //     this.Q2Visible
+            //     && this.answers[1] === 'Enrollment Firm'
+            //     && this.answers[2] === true
+            // )
         );
     }
 

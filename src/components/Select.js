@@ -5,8 +5,9 @@ const StyledSelect = styled.select`
     margin-top: 10px;
 
     @media screen and (min-width: 768px) {
+        flex-direction: row; 
         margin-top: 5px;
-        flex-direction: row;    
+        padding-right: 35px;
     }
 `;
 

@@ -28,7 +28,7 @@ export const links = [
         link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpAOeDIhO4tHyw=="
     },
     {
-        answers: [true, 'Enrollment Firm', true, undefined, undefined, true, undefined, undefined, undefined, undefined],
+        answers: [true, 'Enrollment Firm', true, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
         link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpBWil9IfBnaHg=="
     },
 ]
