@@ -196,9 +196,9 @@ describe('outcomes', () => {
         setAnswers({ a1: true, a2: "Enrollment Firm" });
         expectVisibleQuestions({ q2: true, q3: true });
         setAnswers({ a1: true, a2: "Enrollment Firm", a3: true });
-        expectVisibleQuestions({ q2: true, q3: true, q6: true });
-        setAnswers({ a1: true, a2: "Enrollment Firm", a3: true, a6: true });
-        expectVisibleQuestions({ q2: true, q3: true, q6: true, link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpBWil9IfBnaHg==" });        
+        expectVisibleQuestions({ q2: true, q3: true, q6: false });
+        // setAnswers({ a1: true, a2: "Enrollment Firm", a3: true, a6: true });
+        expectVisibleQuestions({ q2: true, q3: true, link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpBWil9IfBnaHg==" });        
     });
 
     test('outcome row 21', () => {
@@ -207,9 +207,9 @@ describe('outcomes', () => {
         setAnswers({ a1: true, a2: "Enrollment Firm" });
         expectVisibleQuestions({ q2: true, q3: true });
         setAnswers({ a1: true, a2: "Enrollment Firm", a3: true });
-        expectVisibleQuestions({ q2: true, q3: true, q6: true });
-        setAnswers({ a1: true, a2: "Enrollment Firm", a3: true, a6: false });
-        expectVisibleQuestions({ q2: true, q3: true, q6: true, endProcess: true });        
+        expectVisibleQuestions({ q2: true, q3: true, q6: false });
+        // setAnswers({ a1: true, a2: "Enrollment Firm", a3: true, a6: false });
+        expectVisibleQuestions({ q2: true, q3: true, endProcess: true });        
     });
 });
 

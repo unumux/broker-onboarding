@@ -5,6 +5,7 @@ import UiState from '../state/UiState';
 import { YesNoToggle } from '../components/YesNoToggle';
 import { QuestionSet } from '../components/QuestionSet';
 import { questions } from '../constants/questions';
+import { notes } from '../constants/notes';
 
 @observer
 export class Question6 extends Component {
@@ -13,6 +14,7 @@ export class Question6 extends Component {
             <QuestionSet 
                 question={UiState.Q6}
                 AnswerComponent={<YesNoToggle selectedValue={UiState.answers[5]} onChange={(val) => {UiState.answers[5] = val}}  />}
+                note={notes.Note2}
             />
         );
     }

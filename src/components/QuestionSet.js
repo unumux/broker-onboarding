@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const StyledQuestionSet = styled.div`
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     padding: 20px;
     margin: 0 -20px;
 
@@ -31,13 +32,16 @@ const Answer = styled.div`
     }
 `;
 
+const Note = styled.div``;
+
 export class QuestionSet extends PureComponent {
     render() {
-        const { question, AnswerComponent = null } = this.props;
+        const { question, AnswerComponent = null, note } = this.props;
         return (
             <StyledQuestionSet>
                 <Question>{question}</Question>
                 <Answer>{AnswerComponent}</Answer>
+                {note ? <Note>{note}</Note>  : ""}
             </StyledQuestionSet>
         );
     }
