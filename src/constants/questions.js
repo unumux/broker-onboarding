@@ -9,8 +9,8 @@ export const questions = {
     Q4: 'Will Unum pay compensation to your SSN or to a Company Tax ID?',
     Q5: 'Are you on boarding with Unum as an Individual Broker or wanting to setup an Agency/Brokerage Firm/Company?',
     Q6: [
-        'By agreeing, I hereby certify that my Agency/Broker Firm/Company has been established with Unum and I wish to be onboarded with Unum as an agent employed by that Agency/Broker Firm/Company.',
-        'By agreeing, I hereby certify that I am an officer of the company and represent that I have the full authority to execute this request and following documentation on behalf of the company.'
+        'By agreeing, I hereby certify that I am an officer of the company and represent that I have the full authority to execute this request and following documentation on behalf of the company.',
+        'By agreeing, I hereby certify that my Agency/Broker Firm/Company has been established with Unum and I wish to be onboarded with Unum as an agent employed by that Agency/Broker Firm/Company.'
     ],
     Q7: 'If you plan to sell Unum business through one of the following entities, please select the applicable entity.',
     Q8: 'By selecting Colonial Life, I hereby certify that my Agency, Brokerage Firm, or Company previously completed their onboarding process and am recognized as a Colonial Life agent.',

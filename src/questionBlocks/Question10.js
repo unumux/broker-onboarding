@@ -13,6 +13,8 @@ export class Question10 extends Component {
             <QuestionSet 
                 question={UiState.Q10}
                 AnswerComponent={<YesNoToggle selectedValue={UiState.answers[9]} onChange={(val) => {UiState.answers[9] = val}}  />}
+                note="Note: For questions regarding your Colonial Life agent status, please contact 1-866-531-2022."
+
             />
         );
     }
