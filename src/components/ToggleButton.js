@@ -27,7 +27,8 @@ const Label = styled.label.attrs({
 
     &:hover {
         background: #f6f6f6;
-        border: 1px solid #e9e9e9;        
+        border: 1px solid #e9e9e9;
+        color: #015294;        
     }
 
     input[type='radio']:checked + & {
