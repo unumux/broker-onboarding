@@ -14,7 +14,7 @@ export class UiState {
     @computed get Q3Visible() {
         return (
             this.Q2Visible 
-            && ['Broker', 'Enrollment Firm', 'Benefit Counselor (Enroller)'].indexOf(this.answers[1]) >= 0
+            && ['Broker', 'Enrollment Firm', 'Benefit Counselor (Enroller)','Third Party Administrator'].indexOf(this.answers[1]) >= 0
         );
     }
 
@@ -141,6 +141,7 @@ export class UiState {
         return false;
     }
 
+    //reset
     constructor() {
         observe(this.answers, (change) => {
             for(let i = change.index + 1; i < this.answers.length; i++) {
