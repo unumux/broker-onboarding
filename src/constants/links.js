@@ -31,4 +31,8 @@ export const links = [
         answers: [true, 'Enrollment Firm', true, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
         link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpBWil9IfBnaHg=="
     },
+    {
+        answers: [true, 'Third Party Administrator', true, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
+        link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpAjLeC1MkrGRg==                               "
+    },
 ]
