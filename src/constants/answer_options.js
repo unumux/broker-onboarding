@@ -3,7 +3,8 @@ export const answerOptions = {
         'Broker',
         'Benefit Counselor (Enroller)',
         'Enrollment Firm',
-        'Third Party Administrator'
+        'Third Party Administrator',
+        'Benefit Administrator',
     ],
     '4': [
         'SSN',

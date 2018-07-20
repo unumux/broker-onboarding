@@ -35,4 +35,8 @@ export const links = [
         answers: [true, 'Third Party Administrator', true, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
         link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpAjLeC1MkrGRg==                               "
     },
+    {
+        answers: [true, 'Benefit Administrator', true, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
+        link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpAjLeC1MkrGRg=="
+    },
 ]
