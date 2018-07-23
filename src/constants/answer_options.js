@@ -13,5 +13,9 @@ export const answerOptions = {
     '5': [
         'Agency, Brokerage Firm, or Company',
         'Individual Broker'
+    ],
+    'sharedLink' : [
+        'Third Party Administrator',
+        'Benefit Administrator',
     ]
 };

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { questions } from '../constants/questions';
+import { answerOptions } from '../constants/answer_options';
 import { observable, computed, observe } from 'mobx';
 import { links } from '../constants/links';
 
@@ -125,6 +126,11 @@ export class UiState {
 
     @computed get link() {
         const answers = this.answers.toJS();
+
+        if(answerOptions['sharedLink'].indexOf(answers[1]) >= 0)
+            answers[1] = "Shared Link";
+
+        console.log(answers);
         const foundLink = _.find(links, (o) => _.isEqual(o.answers, answers) );
         if(foundLink) {
             return foundLink.link;
