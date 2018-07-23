@@ -5,6 +5,7 @@ export const answerOptions = {
         'Enrollment Firm',
         'Third Party Administrator',
         'Benefit Administrator',
+        'Technology Provider',
     ],
     '4': [
         'SSN',

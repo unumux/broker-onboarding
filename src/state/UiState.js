@@ -14,7 +14,7 @@ export class UiState {
     @computed get Q3Visible() {
         return (
             this.Q2Visible 
-            && ['Broker', 'Enrollment Firm', 'Benefit Counselor (Enroller)','Third Party Administrator', 'Benefit Administrator'].indexOf(this.answers[1]) >= 0
+            && ['Broker', 'Enrollment Firm', 'Benefit Counselor (Enroller)','Third Party Administrator', 'Benefit Administrator', 'Technology Provider'].indexOf(this.answers[1]) >= 0
         );
     }
 
