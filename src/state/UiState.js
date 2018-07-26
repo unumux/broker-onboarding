@@ -14,7 +14,7 @@ export class UiState {
     @computed get Q3Visible() {
         return (
             this.Q2Visible 
-            && ['Broker', 'Enrollment Firm', 'Benefit Counselor (Enroller)','Third Party Administrator', 'Benefit Administrator', 'Technology Provider'].indexOf(this.answers[1]) >= 0
+            && ['Broker', 'Enrollment Firm', 'Benefit Counselor (Enroller)','Third Party Administrator', 'Benefit Administrator', 'Technology Provider',].indexOf(this.answers[1]) >= 0
         );
     }
 
@@ -125,6 +125,15 @@ export class UiState {
 
     @computed get link() {
         const answers = this.answers.toJS();
+        const sharedLinkArray = ["Third Party Administrator", "Benefit Administrator", "Technology Provider"];
+
+        // checks to see if the user's role selection matches any in the "SharedLinkArray" and if so, reassigning
+        // the user's selection to "Shared Link" because all three of those roles share the same end link.
+        // this way only have to store the end link once.
+        if(sharedLinkArray.indexOf(answers[1]) >= 0) {
+            answers[1] = "Shared Link";
+        };
+
         const foundLink = _.find(links, (o) => _.isEqual(o.answers, answers) );
         if(foundLink) {
             return foundLink.link;
