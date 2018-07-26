@@ -68,6 +68,10 @@ class App extends Component {
                 componentTrue={<End heading="You must agree to the statement above to continue." body="If you have questions, please contact one of our Service Specialists at 1-800-ASK-UNUM (1-800-275-8686) for further assistance." />}
             />
             <ConditionalContent 
+                value={UiState.endProcess && UiState.answers[8] === false}
+                componentTrue={<End heading="We appreciate your interest in becoming a Unum Sales Partner." body="Please contact one of our Service Specialists at 1-800-ASK-UNUM (1-800-275-8686) to begin the onboarding process." />}
+            />
+            <ConditionalContent 
                 value={UiState.link && UiState.link.length > 0}
                 componentTrue={<LinkOut url={UiState.link} />}
             />

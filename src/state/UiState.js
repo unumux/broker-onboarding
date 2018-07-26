@@ -15,7 +15,7 @@ export class UiState {
     @computed get Q3Visible() {
         return (
             this.Q2Visible 
-            && ['Broker', 'Enrollment Firm', 'Benefit Counselor (Enroller)','Third Party Administrator', 'Benefit Administrator'].indexOf(this.answers[1]) >= 0
+            && this.answers[1] !== undefined
         );
     }
 
@@ -51,7 +51,7 @@ export class UiState {
     @computed get Q7Visible() {
         return (
             this.Q6Visible
-            && this.answers[4] === "Agency, Brokerage Firm, or Company"
+            && answerOptions['5'].indexOf(this.answers[4]) >=0
             && this.answers[5] === true
         );
     }
@@ -104,31 +104,44 @@ export class UiState {
     Q10 = questions.Q10;
 
     @computed get A7Options() {
+
+        let allOptions = [...answerOptions['nmoMember'], ...answerOptions['nmoOwned']];
+
         if(this.answers[4] === "Agency, Brokerage Firm, or Company") {
-            return [
-                "Colonial Life",
-                "Independent Company"
-            ];
+            allOptions = [...allOptions, 'Colonial Life','Independent Company'];   
+        }
+        else {
+            allOptions = [...allOptions, 'Independent Company'];
         }
 
-        return [
-            "Independent Company"
-        ];
+        return allOptions.sort();
     }
 
     @computed get A9Options() {
-        return [
-            "Colonial Life",
-            "Independent Broker",
-            "NY Life"
-        ];
+
+        let allOptions = [...answerOptions['nmoMember'], ...answerOptions['nmoOwned'], 'Colonial Life', 'Independent Broker', 'NY Life'];
+
+        return allOptions.sort();
     }
 
     @computed get link() {
         const answers = this.answers.toJS();
 
+        // Handles the 3 roles (Q2) that resolve to the same url
         if(answerOptions['sharedLink'].indexOf(answers[1]) >= 0)
             answers[1] = "Shared Link";
+
+        // Handles an Agency, Brokerage firm, or Co.(Q5) NMO selection (Q7)     
+        if(this.answers[4] === 'Agency, Brokerage Firm, or Company' && answerOptions['nmoMember'].indexOf(answers[6]) >= 0)
+            answers[6] = "NMO Member";
+
+        // Handles an Individual Broker (Q5) NMO selection (Q7)     
+        if(this.answers[4] === 'Individual Broker' && (answerOptions['nmoMember'].indexOf(answers[6]) >= 0 || answerOptions['nmoOwned'].indexOf(answers[6]) >= 0))
+            answers[6] = "NMO";
+
+        // Is A8 a NMO Member?     
+        if(answerOptions['nmoMember'].indexOf(answers[8]) >= 0)
+            answers[8] = "NMO Member";
 
         console.log(answers);
         const foundLink = _.find(links, (o) => _.isEqual(o.answers, answers) );
@@ -140,9 +153,13 @@ export class UiState {
     }
 
     @computed get endProcess() {
+
         if(this.answers.indexOf(false) >= 0) {
             return true;
         }
+
+        if((this.answers[4] !== 'Individual Broker' && answerOptions['nmoOwned'].indexOf(this.answers[6]) >= 0) || answerOptions['nmoOwned'].indexOf(this.answers[8]) >= 0)
+            return true;
 
         return false;
     }
