@@ -16,6 +16,7 @@ import {
 } from './questionBlocks/Questions';
 import { End } from './components/End';
 import { LinkOut } from './components/LinkOut';
+//import { answerOptions } from './constants/answer_options';
 
 @observer
 class App extends Component {
@@ -64,12 +65,16 @@ class App extends Component {
                 componentTrue={<End heading="You must have an active license to sell insurance to continue." body="If you have questions, please contact one of our Service Specialists at 1-800-ASK-UNUM (1-800-275-8686) for further assistance." />}
             />
             <ConditionalContent 
-                value={UiState.endProcess && UiState.answers[0] === true}
-                componentTrue={<End heading="You must agree to the statement above to continue." body="If you have questions, please contact one of our Service Specialists at 1-800-ASK-UNUM (1-800-275-8686) for further assistance." />}
+                value={UiState.endProcess && UiState.answers[1] === "General Agent" && UiState.answers[2] === true}
+                componentTrue={<End heading="" body="Please contact your Unum Sales Representative for additional information." />}
             />
             <ConditionalContent 
-                value={UiState.endProcess && UiState.answers[8] === false}
+                value={UiState.endProcess && UiState.answers['nmoOut'] === true }
                 componentTrue={<End heading="We appreciate your interest in becoming a Unum Sales Partner." body="Please contact one of our Service Specialists at 1-800-ASK-UNUM (1-800-275-8686) to begin the onboarding process." />}
+            />
+            <ConditionalContent 
+                value={UiState.endProcess && UiState.answers.indexOf(false) >= 1}
+                componentTrue={<End heading="You must agree to the statement above to continue." body="If you have questions, please contact one of our Service Specialists at 1-800-ASK-UNUM (1-800-275-8686) for further assistance." />}
             />
             <ConditionalContent 
                 value={UiState.link && UiState.link.length > 0}

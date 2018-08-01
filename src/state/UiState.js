@@ -158,8 +158,16 @@ export class UiState {
             return true;
         }
 
-        if((this.answers[4] !== 'Individual Broker' && answerOptions['nmoOwned'].indexOf(this.answers[6]) >= 0) || answerOptions['nmoOwned'].indexOf(this.answers[8]) >= 0)
+        if(this.answers[1] === "General Agent" && this.answers[2]) {
             return true;
+        }
+
+        this.answers['nmoOut'] = false;
+
+        if((this.answers[4] !== 'Individual Broker' && answerOptions['nmoOwned'].indexOf(this.answers[6]) >= 0) || answerOptions['nmoOwned'].indexOf(this.answers[8]) >= 0) {
+            this.answers['nmoOut'] = true;
+            return true;
+        }
 
         return false;
     }

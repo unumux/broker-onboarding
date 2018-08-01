@@ -5,7 +5,7 @@ import UiState from '../state/UiState';
 import { answerOptions } from '../constants/answer_options';
 import { Select } from '../components/Select';
 import { QuestionSet } from '../components/QuestionSet';
-import { questions } from '../constants/questions';
+//import { questions } from '../constants/questions';
 @observer
 export class Question2 extends Component {
     render() {
