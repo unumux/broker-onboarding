@@ -32,15 +32,7 @@ export const links = [
         link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpBWil9IfBnaHg=="
     },
     {
-        answers: [true, 'Third Party Administrator', true, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
-        link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpAjLeC1MkrGRg==                               "
-    },
-    {
-        answers: [true, 'Benefit Administrator', true, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
-        link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpAjLeC1MkrGRg=="
-    },
-    {
-        answers: [true, 'Technology Provider', true, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
+        answers: [true, 'Shared Link', true, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
         link: "https://pangea.geninfo.com/Unum/Apply/Default.aspx?BY29ChRPFpAjLeC1MkrGRg="
     },
 ]
