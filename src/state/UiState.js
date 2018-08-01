@@ -143,7 +143,7 @@ export class UiState {
         if(answerOptions['nmoMember'].indexOf(answers[8]) >= 0)
             answers[8] = "NMO Member";
 
-        console.log(answers);
+        //console.log(answers);
         const foundLink = _.find(links, (o) => _.isEqual(o.answers, answers) );
         if(foundLink) {
             return foundLink.link;
@@ -158,7 +158,7 @@ export class UiState {
             return true;
         }
 
-        if(this.answers[1] === "General Agent" && this.answers[2]) {
+        if(this.answers[1] === "General Agent") {
             return true;
         }
 
