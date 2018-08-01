@@ -40,11 +40,6 @@ export class UiState {
                 this.Q5Visible
                 && this.answers[4] !== undefined
             )
-            // || (
-            //     this.Q2Visible
-            //     && this.answers[1] === 'Enrollment Firm'
-            //     && this.answers[2] === true
-            // )
         );
     }
 
@@ -154,6 +149,8 @@ export class UiState {
 
     @computed get endProcess() {
 
+        this.answers['nmoOut'] = false;
+
         if(this.answers.indexOf(false) >= 0) {
             return true;
         }
@@ -161,8 +158,6 @@ export class UiState {
         if(this.answers[1] === "General Agent") {
             return true;
         }
-
-        this.answers['nmoOut'] = false;
 
         if((this.answers[4] !== 'Individual Broker' && answerOptions['nmoOwned'].indexOf(this.answers[6]) >= 0) || answerOptions['nmoOwned'].indexOf(this.answers[8]) >= 0) {
             this.answers['nmoOut'] = true;
