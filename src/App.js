@@ -16,7 +16,6 @@ import {
 } from './questionBlocks/Questions';
 import { End } from './components/End';
 import { LinkOut } from './components/LinkOut';
-//import { answerOptions } from './constants/answer_options';
 
 @observer
 class App extends Component {
