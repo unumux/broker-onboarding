@@ -6,6 +6,7 @@ export const answerOptions = {
         'Third Party Administrator',
         'Benefit Administrator',
         'Technology Provider',
+        'General Agent'
     ],
     '4': [
         'SSN',
@@ -14,5 +15,32 @@ export const answerOptions = {
     '5': [
         'Agency, Brokerage Firm, or Company',
         'Individual Broker'
-    ]
+    ],
+    'nmoMember': [
+        'Acrisure',
+        'Assurex Global',
+        'BAN - Benefit Advisors Network',
+        'NFP Benefits',
+        'ProSential Benefits LLC',
+        "UBA - United Benefit Advisors"
+    ],
+    'nmoOwned': [
+        'AON',
+        'Alliant',
+        'BB&T',
+        'Brown & Brown Insurance',
+        'Gallagher Benefit Services, Inc.',
+        'HUB International',
+        'Leavitt Group',
+        'Lockton Companies',
+        'M Financial Group',
+        'MMA - Marsh & McLennan Agency',
+        'Mercer',
+        'One Digital',
+        'Paychex',
+        'Towers Watson',
+        'USI Insurance Services',
+        'Wells Fargo',
+        'Willis'
+    ],
 };

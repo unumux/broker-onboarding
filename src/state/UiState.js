@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { questions } from '../constants/questions';
+import { answerOptions } from '../constants/answer_options';
 import { observable, computed, observe } from 'mobx';
 import { links } from '../constants/links';
 
@@ -14,7 +15,7 @@ export class UiState {
     @computed get Q3Visible() {
         return (
             this.Q2Visible 
-            && ['Broker', 'Enrollment Firm', 'Benefit Counselor (Enroller)','Third Party Administrator', 'Benefit Administrator', 'Technology Provider',].indexOf(this.answers[1]) >= 0
+            && this.answers[1] !== undefined
         );
     }
 
@@ -39,18 +40,13 @@ export class UiState {
                 this.Q5Visible
                 && this.answers[4] !== undefined
             )
-            // || (
-            //     this.Q2Visible
-            //     && this.answers[1] === 'Enrollment Firm'
-            //     && this.answers[2] === true
-            // )
         );
     }
 
     @computed get Q7Visible() {
         return (
             this.Q6Visible
-            && this.answers[4] === "Agency, Brokerage Firm, or Company"
+            && answerOptions['5'].indexOf(this.answers[4]) >=0
             && this.answers[5] === true
         );
     }
@@ -103,24 +99,24 @@ export class UiState {
     Q10 = questions.Q10;
 
     @computed get A7Options() {
+
+        let allOptions = [...answerOptions['nmoMember'], ...answerOptions['nmoOwned']];
+
         if(this.answers[4] === "Agency, Brokerage Firm, or Company") {
-            return [
-                "Colonial Life",
-                "Independent Company"
-            ];
+            allOptions = [...allOptions, 'Colonial Life','Independent Company'];   
+        }
+        else {
+            allOptions = [...allOptions, 'Independent Company'];
         }
 
-        return [
-            "Independent Company"
-        ];
+        return allOptions.sort();
     }
 
     @computed get A9Options() {
-        return [
-            "Colonial Life",
-            "Independent Broker",
-            "NY Life"
-        ];
+
+        let allOptions = [...answerOptions['nmoMember'], ...answerOptions['nmoOwned'], 'Colonial Life', 'Independent Broker', 'NY Life'];
+
+        return allOptions.sort();
     }
 
     @computed get link() {
@@ -134,6 +130,18 @@ export class UiState {
             answers[1] = "Shared Link";
         };
 
+        // Handles an Agency, Brokerage firm, or Co.(Q5) NMO selection (Q7)     
+        if(this.answers[4] === 'Agency, Brokerage Firm, or Company' && answerOptions['nmoMember'].indexOf(answers[6]) >= 0)
+            answers[6] = "NMO Member";
+
+        // Handles an Individual Broker (Q5) NMO selection (Q7)     
+        if(this.answers[4] === 'Individual Broker' && (answerOptions['nmoMember'].indexOf(answers[6]) >= 0 || answerOptions['nmoOwned'].indexOf(answers[6]) >= 0))
+            answers[6] = "NMO";
+
+        // Is A8 a NMO Member?     
+        if(answerOptions['nmoMember'].indexOf(answers[8]) >= 0)
+            answers[8] = "NMO Member";
+
         const foundLink = _.find(links, (o) => _.isEqual(o.answers, answers) );
         if(foundLink) {
             return foundLink.link;
@@ -143,7 +151,19 @@ export class UiState {
     }
 
     @computed get endProcess() {
+
+        this.answers['nmoOut'] = false;
+
         if(this.answers.indexOf(false) >= 0) {
+            return true;
+        }
+
+        if(this.answers[1] === "General Agent") {
+            return true;
+        }
+
+        if((this.answers[4] !== 'Individual Broker' && answerOptions['nmoOwned'].indexOf(this.answers[6]) >= 0) || answerOptions['nmoOwned'].indexOf(this.answers[8]) >= 0) {
+            this.answers['nmoOut'] = true;
             return true;
         }
 

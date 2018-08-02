@@ -4,7 +4,6 @@ import { observer } from 'mobx-react';
 import UiState from '../state/UiState';
 import { Select } from '../components/Select';
 import { QuestionSet } from '../components/QuestionSet';
-import { questions } from '../constants/questions';
 
 @observer
 export class Question9 extends Component {
