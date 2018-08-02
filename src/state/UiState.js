@@ -121,10 +121,14 @@ export class UiState {
 
     @computed get link() {
         const answers = this.answers.toJS();
+        const sharedLinkArray = ["Third Party Administrator", "Benefit Administrator", "Technology Provider"];
 
-        // Handles the 3 roles (Q2) that resolve to the same url
-        if(answerOptions['sharedLink'].indexOf(answers[1]) >= 0)
+        // checks to see if the user's role selection matches any in the "SharedLinkArray" and if so, reassigning
+        // the user's selection to "Shared Link" because all three of those roles share the same end link.
+        // this way only have to store the end link once.
+        if(sharedLinkArray.indexOf(answers[1]) >= 0) {
             answers[1] = "Shared Link";
+        };
 
         // Handles an Agency, Brokerage firm, or Co.(Q5) NMO selection (Q7)     
         if(this.answers[4] === 'Agency, Brokerage Firm, or Company' && answerOptions['nmoMember'].indexOf(answers[6]) >= 0)
@@ -138,7 +142,6 @@ export class UiState {
         if(answerOptions['nmoMember'].indexOf(answers[8]) >= 0)
             answers[8] = "NMO Member";
 
-        //console.log(answers);
         const foundLink = _.find(links, (o) => _.isEqual(o.answers, answers) );
         if(foundLink) {
             return foundLink.link;

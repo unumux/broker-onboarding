@@ -5,7 +5,8 @@ export const answerOptions = {
         'Enrollment Firm',
         'Third Party Administrator',
         'Benefit Administrator',
-        'General Agent',
+        'Technology Provider',
+        'General Agent'
     ],
     '4': [
         'SSN',
@@ -42,8 +43,4 @@ export const answerOptions = {
         'Wells Fargo',
         'Willis'
     ],
-    'sharedLink' : [
-        'Third Party Administrator',
-        'Benefit Administrator',
-    ]
 };
