@@ -47,7 +47,7 @@ export class QuestionSet extends PureComponent {
         const { question, note, AnswerComponent = null } = this.props;
         return (
             <StyledQuestionSet>
-                <Question>{question}</Question>
+                <Question> { question.split('\n').map((item, key) => { return <p key={key}>{item}</p> }) } </Question>
                 <Answer>{AnswerComponent}</Answer>
                 {!note ? null : <Note>{note}</Note>}
             </StyledQuestionSet>
