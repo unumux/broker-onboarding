@@ -20,6 +20,7 @@ export const answerOptions = {
         'Acrisure',
         'Assurex Global',
         'BAN - Benefit Advisors Network',
+        'M Financial Group',
         'NFP Benefits',
         'ProSential Benefits LLC',
         "UBA - United Benefit Advisors"
@@ -33,7 +34,6 @@ export const answerOptions = {
         'HUB International',
         'Leavitt Group',
         'Lockton Companies',
-        'M Financial Group',
         'MMA - Marsh & McLennan Agency',
         'Mercer',
         'One Digital',
