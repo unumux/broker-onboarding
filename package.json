@@ -110,7 +110,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "homepage": "https://unumux.github.io/broker-onboarding-acpt",
+  "homepage": "https://unumux.github.io/broker-onboarding",
   "devDependencies": {
     "babel-plugin-styled-components": "^1.5.0"
   }
