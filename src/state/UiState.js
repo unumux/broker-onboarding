@@ -103,20 +103,17 @@ export class UiState {
         let allOptions = [...answerOptions['nmoMember'], ...answerOptions['nmoOwned']];
 
         if(this.answers[4] === "Agency, Brokerage Firm, or Company") {
-            allOptions = [...allOptions, 'Colonial Life','Independent Company'];   
-        }
-        else {
-            allOptions = [...allOptions, 'Independent Company'];
+            allOptions = [...allOptions, 'Colonial Life'];   
         }
 
-        return allOptions.sort();
+        return allOptions = ['Independent Company', ...allOptions.sort()];
     }
-
+    
     @computed get A9Options() {
 
-        let allOptions = [...answerOptions['nmoMember'], ...answerOptions['nmoOwned'], 'Colonial Life', 'Independent Broker', 'NY Life'];
+        let allOptions = [...answerOptions['nmoMember'], ...answerOptions['nmoOwned'], 'Colonial Life', 'NY Life'];
 
-        return allOptions.sort();
+        return allOptions = ['Independent Broker', ...allOptions.sort()];
     }
 
     @computed get link() {
