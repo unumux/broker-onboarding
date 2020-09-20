@@ -18,7 +18,7 @@ const Radio = styled.input.attrs({
 `;
 
 const Label = styled.label.attrs({
-    className: 'willow-button'
+    className: 'button'
 })`
 
     background: #fff;

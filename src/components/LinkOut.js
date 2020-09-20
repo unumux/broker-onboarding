@@ -16,7 +16,7 @@ const Text = styled.h3`
 `;
 
 const Link = styled.a.attrs({
-    className: "willow-button willow-button--inline"
+    className: "button button--inline"
 })`
 
 `;
