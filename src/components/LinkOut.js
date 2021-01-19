@@ -12,7 +12,7 @@ const StyledLinkOut = styled.div`
 `;
 
 const Text = styled.h3`
-
+    margin-bottom: 2.4rem !important;
 `;
 
 const Link = styled.a.attrs({

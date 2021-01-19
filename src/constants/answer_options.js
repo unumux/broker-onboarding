@@ -27,9 +27,11 @@ export const answerOptions = {
     ],
     'nmoOwned': [
         'AON',
+        'Alera Group',
         'Alliant',
         'BB&T',
         'Brown & Brown Insurance',
+        'EPIC Edgewood Partners Insurance Company',
         'Gallagher Benefit Services, Inc.',
         'HUB International',
         'Leavitt Group',
